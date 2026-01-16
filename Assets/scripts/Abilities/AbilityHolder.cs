@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,15 +40,38 @@ public class AbilityHolder : MonoBehaviour
         abilityInput1.Disable();
         abilityInput2.Disable();
     }  
+
+    bool isOneReady = true;
     private void ActivateAbility1(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if(!isOneReady){return;}
         ability1.Activate(gameObject);
+        StartCoroutine(AbilityCooldown1());
     }
 
+    IEnumerator AbilityCooldown1()
+    {
+        isOneReady = false;
+        yield return new WaitForSeconds(ability1.Cooldown());
+        isOneReady = true;
+    }
+
+    bool isTwoReady = true;
     private void ActivateAbility2(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if(!isTwoReady){return;}
         ability2.Activate(gameObject);
+        StartCoroutine(AbilityCooldown2());
     }
+
+
+    IEnumerator AbilityCooldown2()
+    {
+        isTwoReady = false;
+        yield return new WaitForSeconds(ability2.Cooldown());
+        isTwoReady = true;
+    }
+
 
   
 }

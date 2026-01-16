@@ -3,4 +3,6 @@ using UnityEngine;
 public interface IAbility
 {
     public void Activate(GameObject player);
+
+    public float Cooldown();
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController controller;
-    [SerializeField] float speed;
+    [SerializeField] float baseSpeed;
+    float currentSpeed;
     Vector2 movement;
     public InputAction MovementAction{get;private set;}
 
@@ -13,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();   
         MovementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
+        currentSpeed = baseSpeed;
     }
 
     void OnEnable()
@@ -27,7 +30,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        movement = Time.deltaTime * speed *  MovementAction.ReadValue<Vector2>().normalized;
+        movement = Time.deltaTime * currentSpeed *  MovementAction.ReadValue<Vector2>().normalized;
         controller.Move(movement);
+    }
+
+    Coroutine speedBoostRoutine;
+    public void SpeedBoost(float time, float speed)
+    {
+        StopCoroutine(speedBoostRoutine);
+        speedBoostRoutine = StartCoroutine(Speedboost(time,speed));    
+    }
+
+    IEnumerator Speedboost(float time, float speed)
+    {
+        currentSpeed = speed;
+        yield return new WaitForSeconds(time);
+        currentSpeed = baseSpeed;
     }
 }
