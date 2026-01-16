@@ -5,10 +5,10 @@ public class TrascendCondition : BaseCondition
 {
     public override bool Check(BaseStateMachine stateMachine, CallState stateType)
     {
-        switch (stateType)
+        if (stateMachine.blackboard.Get<bool>("trascend"))
         {
-            default:
-                return false;
+            return true;
         }
+        return false;
     }
 }

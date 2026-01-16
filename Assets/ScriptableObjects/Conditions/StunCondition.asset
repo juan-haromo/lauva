@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad11a7a3d95e64e4cafa6513604ad3c3, type: 3}
   m_Name: StunCondition
   m_EditorClassIdentifier: Assembly-CSharp::StunCondition
+  maxStunTime: 0.5

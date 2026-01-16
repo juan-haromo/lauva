@@ -19,6 +19,7 @@ public class BaseStateMachine : MonoBehaviour
         agent.updateUpAxis = false;     
         blackboard.Set("maxPlayerDistance",maxPlayerDistance);
         blackboard.Set("StunTime", 0.0f);
+        blackboard.Set("trascend", false);
         GameObject objeto = GameObject.FindWithTag("Player");
         if (!objeto)
         {
@@ -60,5 +61,10 @@ public class BaseStateMachine : MonoBehaviour
             blackboard.Set("StunTime", temp);
             Debug.Log("collide");
         }
+    }
+
+    public void Trascend()
+    {
+        blackboard.Set("trascend", true);
     }
 }
