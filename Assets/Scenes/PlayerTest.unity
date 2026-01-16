@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 83626016}
   - component: {fileID: 83626015}
   - component: {fileID: 83626017}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Typewritter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338273843}
   - component: {fileID: 338273842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   - component: {fileID: 760466311}
   - component: {fileID: 760466312}
   - component: {fileID: 760466313}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
