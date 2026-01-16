@@ -1,16 +1,36 @@
 using UnityEngine;
 
-public class BaseState : MonoBehaviour
+public class BaseState : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public BaseCondition.Transition[] transitions;
+
+    public virtual void EnterState(BaseStateMachine stateMachine)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void ExitState(BaseStateMachine stateMachine)
     {
         
+    }
+
+    public virtual void UpdateState(BaseStateMachine stateMachine)
+    {
+        
+    }
+    
+    public void CheckTransitions(BaseStateMachine stateMachine)
+    {
+        if (transitions.Length > 0)
+        {
+            foreach (BaseCondition.Transition t in transitions)
+            {
+                if (t.condition != null && t.condition.Check(stateMachine))
+                {
+                    stateMachine.ChangeState(t.state);
+                    break;
+                }
+            }
+        }
     }
 }
