@@ -5,11 +5,12 @@ public class FollowingCondition : BaseCondition
 {
     public override bool Check(BaseStateMachine stateMachine, CallState stateType)
     {
-        switch (stateType)
+        float distance = Vector3.Distance(stateMachine.gameObject.transform.position, stateMachine.target.position);
+        if (distance < stateMachine.blackboard.Get<float>("maxPlayerDistance"))
         {
-            default:
-                return false;
+            return true;
         }
+
         return false;
     }
 }
