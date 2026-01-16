@@ -20,5 +20,6 @@ public class IdleState : BaseState
     public override void ExitState(BaseStateMachine stateMachine)
     {
         stateMachine.blackboard.Set("IdleIndexTime", 0f);
+        stateMachine.transform.rotation = new Quaternion(0, 0, 0,0);
     }
 }

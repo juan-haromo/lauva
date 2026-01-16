@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137b5527a8298ae418b794d9f6df3282, type: 3}
   m_Name: FollowingCondition
   m_EditorClassIdentifier: Assembly-CSharp::FollowingCondition
+  maxPlayerDistance: 5

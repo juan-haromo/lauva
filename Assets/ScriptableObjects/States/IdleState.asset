@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: IdleState
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
   transitions:
-  - condition: {fileID: 0}
-    state: {fileID: 11400000}
+  - condition: {fileID: 11400000, guid: 91d08cb2204dbdd43abe84a670530ca0, type: 2}
+    state: {fileID: 11400000, guid: 98a73f0d474205540bf8404a8fe8d8d0, type: 2}
+  - condition: {fileID: 11400000, guid: 4ea0739d08417204586f127eb627002d, type: 2}
+    state: {fileID: 11400000, guid: 11ea0b06759c5e2449d2d9b75798a8a6, type: 2}
   StateType: 0

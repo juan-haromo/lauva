@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1718b5cf780f70047ac09eb714c4ecc6, type: 3}
   m_Name: IdleCondition
   m_EditorClassIdentifier: Assembly-CSharp::IdleCondition
-  maxIndexTime: 0
+  maxIndexTime: 5

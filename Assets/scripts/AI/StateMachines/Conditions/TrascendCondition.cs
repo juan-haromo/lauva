@@ -10,6 +10,5 @@ public class TrascendCondition : BaseCondition
             default:
                 return false;
         }
-        return false;
     }
 }

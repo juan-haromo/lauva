@@ -10,6 +10,5 @@ public class StunCondition : BaseCondition
             default:
                 return false;
         }
-        return false;
     }
 }
