@@ -7,27 +7,27 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     [SerializeField] float speed;
     Vector2 movement;
-    InputAction movementAction;
+    public InputAction MovementAction{get;private set;}
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();   
-        movementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
+        MovementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
     }
 
     void OnEnable()
     {
-       movementAction.Enable();
+       MovementAction.Enable();
     }
 
     void OnDisable()
     {
-        movementAction.Disable();
+        MovementAction.Disable();
     }
 
     void Update()
     {
-        movement = Time.deltaTime * speed *  movementAction.ReadValue<Vector2>().normalized;
+        movement = Time.deltaTime * speed *  MovementAction.ReadValue<Vector2>().normalized;
         controller.Move(movement);
     }
 }
