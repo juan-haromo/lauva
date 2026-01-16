@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Timer.unity
+    guid: e7ee679db179140478d7faf010b2f43e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 586d32e0398b4f743b3ca1d5763979cf, type: 3}
   m_UseUCBPForAssetBundles: 0
