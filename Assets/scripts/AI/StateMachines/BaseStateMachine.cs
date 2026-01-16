@@ -22,7 +22,7 @@ public class BaseStateMachine : MonoBehaviour
         blackboard.Set("StunTime", 0.0f);
         blackboard.Set("trascend", false);
         GameObject objeto = GameObject.FindWithTag("Player");
-        if (!objeto)
+        if (objeto)
         {
             target = objeto.transform;
         }
