@@ -12,6 +12,10 @@ public class StunState : BaseState
     public override void UpdateState(BaseStateMachine stateMachine)
     {
         var temp = stateMachine.blackboard.Get<float>("StunIndexTime") + Time.deltaTime;
+        if (temp > 5)
+        {
+            Destroy(stateMachine.gameObject);
+        }
         stateMachine.blackboard.Set("StunIndexTime", temp);
     }
 
