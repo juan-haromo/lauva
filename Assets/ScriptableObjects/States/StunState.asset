@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd3571e83575be4e848df41361f68a6, type: 3}
   m_Name: StunState
   m_EditorClassIdentifier: Assembly-CSharp::StunState
-  transitions: []
+  transitions:
+  - condition: {fileID: 11400000, guid: 7a294ef4c8b0e8d4b9fbe653ed1ee6c4, type: 2}
+    state: {fileID: 11400000, guid: b6e2081641c97de45a7fb46da751ce45, type: 2}
   StateType: 0
