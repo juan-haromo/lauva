@@ -5,7 +5,7 @@ public class StunState : BaseState
 {
     public override void EnterState(BaseStateMachine stateMachine)
     {
-
+        StateType = CallState.stun;
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)

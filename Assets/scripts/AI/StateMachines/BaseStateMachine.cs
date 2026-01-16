@@ -16,6 +16,7 @@ public class BaseStateMachine : MonoBehaviour
         if (currentState)
         {
             currentState.UpdateState(this);
+            currentState.CheckTransitions(this, currentState.StateType);
         }
     }
 

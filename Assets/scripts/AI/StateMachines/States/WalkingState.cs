@@ -5,7 +5,7 @@ public class WalkingState : BaseState
 {
     public override void EnterState(BaseStateMachine stateMachine)
     {
-
+        StateType = CallState.walking;
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)

@@ -7,6 +7,7 @@ public class IdleState : BaseState
     public override void EnterState(BaseStateMachine stateMachine)
     {
         stateMachine.blackboard.Set("IdleIndexTime", 0f);
+        StateType = CallState.idle;
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)
@@ -18,6 +19,6 @@ public class IdleState : BaseState
 
     public override void ExitState(BaseStateMachine stateMachine)
     {
-
+        stateMachine.blackboard.Set("IdleIndexTime", 0f);
     }
 }
