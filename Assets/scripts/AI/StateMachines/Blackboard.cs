@@ -6,7 +6,6 @@ public class Blackboard
 
     public void Set<T>(string key, T value)
     {
-        //data.TryAdd(key,value);
         data[key] = value;
     }
 

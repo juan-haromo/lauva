@@ -4,15 +4,19 @@ public class BaseStateMachine : MonoBehaviour
 {
     public BaseState initialState;
     [SerializeField] private BaseState currentState;
+    public Blackboard blackboard = new Blackboard();
 
     private void Start()
     {
-        currentState = initialState;
+        ChangeState(initialState);
     }
 
     private void Update()
     {
-        currentState.UpdateState(this);
+        if (currentState)
+        {
+            currentState.UpdateState(this);
+        }
     }
 
     public void ChangeState(BaseState newState)
