@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -63,6 +64,20 @@ public class BaseStateMachine : MonoBehaviour
             blackboard.Set("StunTime", temp);
             Debug.Log(temp + " " + name);
         }
+    }
+
+    public void IncreaseAggro(float aggroMultiplier, float duration)
+    {
+        StartCoroutine(HandleAggro(aggroMultiplier,duration));
+    }
+
+    public IEnumerator HandleAggro(float agroMultiplier, float duration)
+    {
+        float baseAgro = blackboard.Get<float>("maxPlayerDistance");
+        blackboard.Set<float>("maxPlayerDistance",baseAgro * agroMultiplier);
+        yield return new WaitForSeconds(duration);
+        blackboard.Set<float>("maxPlayerDistance",baseAgro);
+
     }
 
     public void Trascend()

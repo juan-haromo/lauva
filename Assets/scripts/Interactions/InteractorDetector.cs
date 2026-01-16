@@ -10,6 +10,7 @@ public class InteractorDetector : MonoBehaviour
     public HashSet<IInteractable> interactables;
     [SerializeField] TextMeshPro lblInteractionName;
     InputAction interactAction;
+    [SerializeField] GameObject player;
     void Start()
     {
         interactables = new HashSet<IInteractable>();
@@ -21,8 +22,8 @@ public class InteractorDetector : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
-        if(interactables.Count < 0){return;}
-        interactables.First().Interact();
+        if(interactables.Count <= 0){return;}
+        interactables.First().Interact(player);
     }
 
     void OnTriggerEnter(Collider other)

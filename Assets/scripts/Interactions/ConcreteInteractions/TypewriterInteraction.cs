@@ -4,7 +4,7 @@ public class TypewriterInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] Typewriter typewriter;
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
         typewriter.ToogleWriting();
     }
