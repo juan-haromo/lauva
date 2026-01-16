@@ -18,7 +18,12 @@ public class IdleCondition : BaseCondition
                 }
                 break;
             case CallState.walking:
-                
+                float distance = Vector3.Distance(stateMachine.gameObject.transform.position,
+                    stateMachine.target.transform.position);
+                if (distance > stateMachine.blackboard.Get<float>("maxPlayerDistance"))
+                {
+                    return true;
+                }
                 break;
             default:
                 return false;
