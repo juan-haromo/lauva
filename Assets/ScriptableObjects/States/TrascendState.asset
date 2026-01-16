@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TrascendState
   m_EditorClassIdentifier: Assembly-CSharp::TrascendState
   transitions: []
-  StateType: 0
+  StateType: 4
