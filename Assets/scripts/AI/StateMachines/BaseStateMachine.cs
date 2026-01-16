@@ -10,6 +10,7 @@ public class BaseStateMachine : MonoBehaviour
     public Transform target;
     public NavMeshAgent agent;
     public float maxPlayerDistance;
+    public LightType lightType;
 
 
 
@@ -53,13 +54,15 @@ public class BaseStateMachine : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("light"))
+        if (other.gameObject.TryGetComponent<ILightSource>(out ILightSource sourceType))
         {
+            if(sourceType.GetLightType() != lightType){return;}
+
             var temp = blackboard.Get<float>("StunTime") + Time.deltaTime;
             blackboard.Set("StunTime", temp);
-            Debug.Log("collide");
+            Debug.Log(temp + " " + name);
         }
     }
 
