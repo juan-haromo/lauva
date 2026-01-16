@@ -5,15 +5,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController controller;
+    public CharacterController Controller{get; private set;}
     [SerializeField] float baseSpeed;
     float currentSpeed;
     Vector2 movement;
+    public Vector2 LastMovement {get; private set;}
     public InputAction MovementAction{get;private set;}
 
     void Awake()
     {
-        controller = GetComponent<CharacterController>();   
+        Controller = GetComponent<CharacterController>();   
         MovementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
         currentSpeed = baseSpeed;
     }
@@ -31,13 +32,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = Time.deltaTime * currentSpeed *  MovementAction.ReadValue<Vector2>().normalized;
-        controller.Move(movement);
+        if(movement != Vector2.zero){LastMovement = movement;}
+        Controller.Move(movement);
     }
 
     Coroutine speedBoostRoutine;
     public void SpeedBoost(float time, float speed)
     {
-        StopCoroutine(speedBoostRoutine);
+        if(speedBoostRoutine != null){StopCoroutine(speedBoostRoutine);}
         speedBoostRoutine = StartCoroutine(Speedboost(time,speed));    
     }
 

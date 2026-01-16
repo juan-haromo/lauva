@@ -58,11 +58,13 @@ public class BaseStateMachine : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<ILightSource>(out ILightSource sourceType))
         {
-            if(sourceType.GetLightType() != lightType){return;}
+            if(sourceType.GetLightType() == lightType || TrascendedLight.areLightsUnified){
 
             var temp = blackboard.Get<float>("StunTime") + Time.deltaTime;
             blackboard.Set("StunTime", temp);
             Debug.Log(temp + " " + name);
+            
+            }
         }
     }
 
