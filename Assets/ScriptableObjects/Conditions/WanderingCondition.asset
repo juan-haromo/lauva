@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c6074da97cfc646a98aef9debf2b2d, type: 3}
   m_Name: WanderingCondition
   m_EditorClassIdentifier: Assembly-CSharp::WanderingCondition
-  maxIndexTime: 5
+  maxIndexTime: 10

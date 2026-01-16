@@ -13,7 +13,6 @@ public class BaseStateMachine : MonoBehaviour
     public LightType lightType;
 
 
-
     private void Start()
     {
         agent.updateRotation = false;
