@@ -3,10 +3,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WanderingCondition", menuName = "BaseEnemy/Conditions/WanderingCondition")]
 public class WanderingCondition : BaseCondition
 {
+    public float maxIndexTime = default;
     public override bool Check(BaseStateMachine stateMachine, CallState stateType)
     {
         switch (stateType)
         {
+            case CallState.idle:
+                if (stateMachine.blackboard.Get<float>("IdleIndexTime") != 0.0f)
+                {
+                    if (stateMachine.blackboard.Get<float>("IdleIndexTime") > maxIndexTime)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case CallState.walking:
+                
+                break;
             default:
                 return false;
         }

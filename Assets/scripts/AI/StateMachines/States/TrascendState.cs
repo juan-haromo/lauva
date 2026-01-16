@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IdleState", menuName = "BaseEnemy/states/TrascendState")]
+[CreateAssetMenu(fileName = "TrascendState", menuName = "BaseEnemy/states/TrascendState")]
 public class TrascendState : BaseState
 {
     public override void EnterState(BaseStateMachine stateMachine)

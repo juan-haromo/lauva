@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IdleState", menuName = "BaseEnemy/states/WanderingState")]
+[CreateAssetMenu(fileName = "WanderingState", menuName = "BaseEnemy/states/WanderingState")]
 public class WanderingState : BaseState
 {
     
@@ -11,7 +11,7 @@ public class WanderingState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-
+        Debug.Log("asdfasdf");
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
