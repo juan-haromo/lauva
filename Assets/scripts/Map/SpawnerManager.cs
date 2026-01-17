@@ -8,7 +8,7 @@ public class SpawnerManager : MonoBehaviour
 
     private void Start()
     {
-        int temp = Random.Range(1, 10);
+        int temp = Random.Range(5, 10);
         spawnEnemies(temp);
     }
 

@@ -11,7 +11,7 @@ public class WanderingCondition : BaseCondition
             case CallState.idle:
                 if (stateMachine.blackboard.Get<float>("IdleIndexTime") != 0.0f)
                 {
-                    if (stateMachine.blackboard.Get<float>("IdleIndexTime") > maxIndexTime)
+                    if (stateMachine.blackboard.Get<float>("IdleIndexTime") > Random.Range(2,maxIndexTime))
                     {
                         return true;
                     }

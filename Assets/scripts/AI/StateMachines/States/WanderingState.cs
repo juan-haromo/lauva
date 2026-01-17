@@ -13,40 +13,35 @@ public class WanderingState : BaseState
         var temp = GetRandomPointOnNavMesh(stateMachine);
         stateMachine.blackboard.Set("stopPoint", temp);
         StateType = CallState.wandering;
+        stateMachine.agent.SetDestination(stateMachine.blackboard.Get<Vector3>("stopPoint"));
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        var temp = stateMachine.blackboard.Get<float>("WanderingIndexTime") + Time.deltaTime;
-        stateMachine.blackboard.Set("WanderingIndexTime", temp);
-        float distance = Vector3.Distance(stateMachine.gameObject.transform.position,stateMachine.blackboard.Get<Vector3>("stopPoint"));
-        if (distance < stopSlope)
-        {
-            var vec3temp = GetRandomPointOnNavMesh(stateMachine);
-            stateMachine.blackboard.Set("stopPoint", vec3temp);
-        }
-        else
-        {
-            stateMachine.agent.SetDestination(stateMachine.blackboard.Get<Vector3>("stopPoint"));
-        }
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
     {
         stateMachine.agent.isStopped = true;
+        stateMachine.blackboard.Set("stopPoint",stateMachine.transform.position);
     }
     Vector3 GetRandomPointOnNavMesh(BaseStateMachine stateMachine)
     {
         Vector3 randomDirection = Random.insideUnitCircle * searchRange;
-        Vector3 targetPosition = stateMachine.gameObject.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
-
+        Vector3 targetPosition = stateMachine.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0);
+        
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(targetPosition, out hit, 1.0f, NavMesh.AllAreas))
+        int walkableAreaIndex = NavMesh.GetAreaFromName("Walkable");
+        Debug.Log(walkableAreaIndex);
+        if (NavMesh.SamplePosition(targetPosition, out hit, 10.0f, walkableAreaIndex))
         {
             return hit.position;
         }
-
-        return stateMachine.gameObject.transform.position;
+        else
+        {
+            Debug.Log("help");
+            return stateMachine.gameObject.transform.position;
+        }
     }
 
 }
