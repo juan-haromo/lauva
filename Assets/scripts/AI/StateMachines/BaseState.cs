@@ -38,7 +38,7 @@ public class BaseState : ScriptableObject
 public enum CallState
 {
     idle,
-    wandering,
+    waypoints,
     walking,
     stun,
     tracend,

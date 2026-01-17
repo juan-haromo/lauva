@@ -109,6 +109,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""3520ae2a-b7c6-4514-b46b-6c5f236eba41"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""5268e13e-730b-4685-a8f4-5351162a2296"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,6 +261,78 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a248751-c508-4f73-9020-17bf83949fe5"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9abd907d-2f39-4286-a131-2d010ff5c26b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""440b55c1-7a83-4b65-8d23-afc98a7765e1"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebd4ad2d-2efc-4b6c-9c6d-45ca55be891a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""VisualNovel"",
+            ""id"": ""f2148ec9-0f13-4a4c-b524-9fb606bb64a6"",
+            ""actions"": [
+                {
+                    ""name"": ""PassDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5adb31a-da54-496a-9ceb-4d2ab4155437"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""87d4faf6-1fda-4906-8123-74d9168ab642"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PassDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -253,11 +343,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Overworld = asset.FindActionMap("Overworld", throwIfNotFound: true);
         m_Overworld_Movement = m_Overworld.FindAction("Movement", throwIfNotFound: true);
         m_Overworld_Interact = m_Overworld.FindAction("Interact", throwIfNotFound: true);
+        m_Overworld_Ability1 = m_Overworld.FindAction("Ability1", throwIfNotFound: true);
+        m_Overworld_Ability2 = m_Overworld.FindAction("Ability2", throwIfNotFound: true);
+        // VisualNovel
+        m_VisualNovel = asset.FindActionMap("VisualNovel", throwIfNotFound: true);
+        m_VisualNovel_PassDialogue = m_VisualNovel.FindAction("PassDialogue", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_Overworld.enabled, "This will cause a leak and performance issues, PlayerInput.Overworld.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_VisualNovel.enabled, "This will cause a leak and performance issues, PlayerInput.VisualNovel.Disable() has not been called.");
     }
 
     /// <summary>
@@ -335,6 +431,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IOverworldActions> m_OverworldActionsCallbackInterfaces = new List<IOverworldActions>();
     private readonly InputAction m_Overworld_Movement;
     private readonly InputAction m_Overworld_Interact;
+    private readonly InputAction m_Overworld_Ability1;
+    private readonly InputAction m_Overworld_Ability2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Overworld".
     /// </summary>
@@ -354,6 +452,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Overworld/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Overworld_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "Overworld/Ability1".
+        /// </summary>
+        public InputAction @Ability1 => m_Wrapper.m_Overworld_Ability1;
+        /// <summary>
+        /// Provides access to the underlying input action "Overworld/Ability2".
+        /// </summary>
+        public InputAction @Ability2 => m_Wrapper.m_Overworld_Ability2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -386,6 +492,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Ability1.started += instance.OnAbility1;
+            @Ability1.performed += instance.OnAbility1;
+            @Ability1.canceled += instance.OnAbility1;
+            @Ability2.started += instance.OnAbility2;
+            @Ability2.performed += instance.OnAbility2;
+            @Ability2.canceled += instance.OnAbility2;
         }
 
         /// <summary>
@@ -403,6 +515,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Ability1.started -= instance.OnAbility1;
+            @Ability1.performed -= instance.OnAbility1;
+            @Ability1.canceled -= instance.OnAbility1;
+            @Ability2.started -= instance.OnAbility2;
+            @Ability2.performed -= instance.OnAbility2;
+            @Ability2.canceled -= instance.OnAbility2;
         }
 
         /// <summary>
@@ -436,6 +554,102 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="OverworldActions" /> instance referencing this action map.
     /// </summary>
     public OverworldActions @Overworld => new OverworldActions(this);
+
+    // VisualNovel
+    private readonly InputActionMap m_VisualNovel;
+    private List<IVisualNovelActions> m_VisualNovelActionsCallbackInterfaces = new List<IVisualNovelActions>();
+    private readonly InputAction m_VisualNovel_PassDialogue;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "VisualNovel".
+    /// </summary>
+    public struct VisualNovelActions
+    {
+        private @PlayerInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public VisualNovelActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "VisualNovel/PassDialogue".
+        /// </summary>
+        public InputAction @PassDialogue => m_Wrapper.m_VisualNovel_PassDialogue;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_VisualNovel; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="VisualNovelActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(VisualNovelActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="VisualNovelActions" />
+        public void AddCallbacks(IVisualNovelActions instance)
+        {
+            if (instance == null || m_Wrapper.m_VisualNovelActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_VisualNovelActionsCallbackInterfaces.Add(instance);
+            @PassDialogue.started += instance.OnPassDialogue;
+            @PassDialogue.performed += instance.OnPassDialogue;
+            @PassDialogue.canceled += instance.OnPassDialogue;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="VisualNovelActions" />
+        private void UnregisterCallbacks(IVisualNovelActions instance)
+        {
+            @PassDialogue.started -= instance.OnPassDialogue;
+            @PassDialogue.performed -= instance.OnPassDialogue;
+            @PassDialogue.canceled -= instance.OnPassDialogue;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="VisualNovelActions.UnregisterCallbacks(IVisualNovelActions)" />.
+        /// </summary>
+        /// <seealso cref="VisualNovelActions.UnregisterCallbacks(IVisualNovelActions)" />
+        public void RemoveCallbacks(IVisualNovelActions instance)
+        {
+            if (m_Wrapper.m_VisualNovelActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="VisualNovelActions.AddCallbacks(IVisualNovelActions)" />
+        /// <seealso cref="VisualNovelActions.RemoveCallbacks(IVisualNovelActions)" />
+        /// <seealso cref="VisualNovelActions.UnregisterCallbacks(IVisualNovelActions)" />
+        public void SetCallbacks(IVisualNovelActions instance)
+        {
+            foreach (var item in m_Wrapper.m_VisualNovelActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_VisualNovelActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="VisualNovelActions" /> instance referencing this action map.
+    /// </summary>
+    public VisualNovelActions @VisualNovel => new VisualNovelActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Overworld" which allows adding and removing callbacks.
     /// </summary>
@@ -457,5 +671,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility2(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "VisualNovel" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="VisualNovelActions.AddCallbacks(IVisualNovelActions)" />
+    /// <seealso cref="VisualNovelActions.RemoveCallbacks(IVisualNovelActions)" />
+    public interface IVisualNovelActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "PassDialogue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPassDialogue(InputAction.CallbackContext context);
     }
 }

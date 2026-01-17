@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,22 +8,24 @@ public class BaseStateMachine : MonoBehaviour
 {
     public BaseState initialState;
     [SerializeField] private BaseState currentState;
+    public List<Transform> waypoints;
+    public int curretWaypoint = new int();
     public Blackboard blackboard = new Blackboard();
     public Transform target;
     public NavMeshAgent agent;
     public float maxPlayerDistance;
+    public LightType lightType;
 
 
-
-    private void Start()
+    private void Start()    
     {
+        blackboard.Set("maxPlayerDistance",maxPlayerDistance);
         agent.updateRotation = false;
         agent.updateUpAxis = false;     
-        blackboard.Set("maxPlayerDistance",maxPlayerDistance);
         blackboard.Set("StunTime", 0.0f);
         blackboard.Set("trascend", false);
         GameObject objeto = GameObject.FindWithTag("Player");
-        if (!objeto)
+        if (objeto)
         {
             target = objeto.transform;
         }
@@ -53,14 +57,32 @@ public class BaseStateMachine : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("light"))
+        if (other.gameObject.TryGetComponent<ILightSource>(out ILightSource sourceType))
         {
+            if(sourceType.GetLightType() == lightType || TrascendedLight.areLightsUnified){
+
             var temp = blackboard.Get<float>("StunTime") + Time.deltaTime;
             blackboard.Set("StunTime", temp);
-            Debug.Log("collide");
+            Debug.Log(temp + " " + name);
+            
+            }
         }
+    }
+
+    public void IncreaseAggro(float aggroMultiplier, float duration)
+    {
+        StartCoroutine(HandleAggro(aggroMultiplier,duration));
+    }
+
+    public IEnumerator HandleAggro(float agroMultiplier, float duration)
+    {
+        float baseAgro = blackboard.Get<float>("maxPlayerDistance");
+        blackboard.Set<float>("maxPlayerDistance",baseAgro * agroMultiplier);
+        yield return new WaitForSeconds(duration);
+        blackboard.Set<float>("maxPlayerDistance",baseAgro);
+
     }
 
     public void Trascend()

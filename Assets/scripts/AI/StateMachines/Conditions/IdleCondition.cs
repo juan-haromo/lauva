@@ -8,13 +8,17 @@ public class IdleCondition : BaseCondition
     {
         switch (stateType)
         {
-            case CallState.wandering:
-                if (stateMachine.blackboard.Get<float>("WanderingIndexTime") != 0.0f)
+            case CallState.waypoints:
+                var temp = Vector3.Distance(stateMachine.gameObject.transform.position,
+                    stateMachine.waypoints[stateMachine.curretWaypoint].position);
+                if (temp < 1.5f)
                 {
-                    if (stateMachine.blackboard.Get<float>("WanderingIndexTime") > maxIndexTime)
+                    stateMachine.curretWaypoint++;
+                    if (stateMachine.waypoints.Count <= stateMachine.curretWaypoint)
                     {
-                        return true;
+                        stateMachine.curretWaypoint = 0;
                     }
+                    return true;
                 }
                 break;
             case CallState.walking:
