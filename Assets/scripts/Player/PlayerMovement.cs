@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         Controller = GetComponent<CharacterController>();   
         MovementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
         currentSpeed = baseSpeed;
+        ascendedLigth.gameObject.SetActive(false);
     }
 
     void OnEnable()
@@ -57,12 +58,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [SerializeField] Transform ascendedLigth;
+    [SerializeField] SpriteRenderer playerSpite;
     IEnumerator Trascended(float duration)
     {
         TrascendedLightManger.Instance.UnifyLights(duration);
         MovementAction.Disable();
+        Color spriteColor = playerSpite.color;
+        spriteColor.a = 0;
+        playerSpite.color = spriteColor; 
         ascendedLigth.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
+        spriteColor.a = 1;
+        playerSpite.color = spriteColor; 
         ascendedLigth.gameObject.SetActive(false);
         MovementAction.Enable();
     }

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e68b0c3aa2307d43b5a874147910ca8, type: 3}
   m_Name: TrascesionLight
   m_EditorClassIdentifier: 
+  cooldown: 5
