@@ -1,0 +1,94 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class BaseStateMachine : MonoBehaviour
+{
+    public BaseState initialState;
+    [SerializeField] private BaseState currentState;
+    public List<Transform> waypoints;
+    public int curretWaypoint = new int();
+    public Blackboard blackboard = new Blackboard();
+    public Transform target;
+    public NavMeshAgent agent;
+    public float maxPlayerDistance;
+    public LightType lightType;
+
+
+    private void Start()    
+    {
+        blackboard.Set("maxPlayerDistance",maxPlayerDistance);
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;     
+        blackboard.Set("StunTime", 0.0f);
+        blackboard.Set("trascend", false);
+        GameObject objeto = GameObject.FindWithTag("Player");
+        if (objeto)
+        {
+            target = objeto.transform;
+        }
+        ChangeState(initialState);
+    }
+
+    private void Update()
+    {
+        if (currentState)
+        {
+            currentState.UpdateState(this);
+            currentState.CheckTransitions(this, currentState.StateType);
+        }
+    }
+
+    public void ChangeState(BaseState newState)
+    {
+        if (newState == currentState || newState == null)
+        {
+            return;
+        }
+
+        if (currentState != null)
+        {
+            currentState.ExitState(this);
+        }
+
+        currentState = newState;
+        currentState.EnterState(this);
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        Debug.Log("stay");
+        if (other.gameObject.TryGetComponent<ILightSource>(out ILightSource sourceType))
+        {
+            if(sourceType.GetLightType() == lightType){
+
+            var temp = blackboard.Get<float>("StunTime") + Time.deltaTime;
+            blackboard.Set("StunTime", temp);
+            Debug.Log(temp + " " + name);
+            
+            }
+        }
+    }
+
+    public void IncreaseAggro(float aggroMultiplier, float duration)
+    {
+        StartCoroutine(HandleAggro(aggroMultiplier,duration));
+    }
+
+    public IEnumerator HandleAggro(float agroMultiplier, float duration)
+    {
+        float baseAgro = blackboard.Get<float>("maxPlayerDistance");
+        blackboard.Set<float>("maxPlayerDistance",baseAgro * agroMultiplier);
+        yield return new WaitForSeconds(duration);
+        blackboard.Set<float>("maxPlayerDistance",baseAgro);
+
+    }
+
+    public GameObject trascendInteraction;
+    public void Trascend()
+    {
+        blackboard.Set("trascend", true);
+    }
+}
