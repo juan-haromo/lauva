@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Conversation : MonoBehaviour, IInteractable
@@ -7,15 +6,14 @@ public class Conversation : MonoBehaviour, IInteractable
     public List<Dialogue> dialogues;
     int currentDialogue = 0;
     [SerializeField] Typewriter typewriter;
+    public string interactionName;
 
     public void Interact(GameObject interactor)
     {
-        
         PlayerInputManager.Instance.Input.Overworld.Disable();
         PlayerInputManager.Instance.Input.VisualNovel.Enable();
         typewriter.StartWriting(dialogues[currentDialogue]);
         typewriter.OnConversationEnd += EndConversation;
-        
     }
 
     private void EndConversation()
@@ -31,7 +29,7 @@ public class Conversation : MonoBehaviour, IInteractable
     }
 
 
-    public string InteractionName()=> " ";
+    public string InteractionName()=> interactionName;
 }
 
 public delegate void ConversationEnd();

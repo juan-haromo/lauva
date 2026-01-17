@@ -59,9 +59,10 @@ public class BaseStateMachine : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        Debug.Log("stay");
         if (other.gameObject.TryGetComponent<ILightSource>(out ILightSource sourceType))
         {
-            if(sourceType.GetLightType() == lightType || TrascendedLight.areLightsUnified){
+            if(sourceType.GetLightType() == lightType){
 
             var temp = blackboard.Get<float>("StunTime") + Time.deltaTime;
             blackboard.Set("StunTime", temp);
@@ -85,6 +86,7 @@ public class BaseStateMachine : MonoBehaviour
 
     }
 
+    public GameObject trascendInteraction;
     public void Trascend()
     {
         blackboard.Set("trascend", true);

@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a39e54642d3874ab2728b243f5c0f3, type: 3}
-  m_Name: waypoints
+  m_Script: {fileID: 11500000, guid: cc736ad6070d7dc4b918aa0e767b6696, type: 3}
+  m_Name: FirstHouse
   m_EditorClassIdentifier: 
-  wayDis: 10
+  dialogues:
+  - "Oh no it\xB4s locked "
+  - I'm sure i can find somethin to open it
+  - But where?
+  - Better start looking for something

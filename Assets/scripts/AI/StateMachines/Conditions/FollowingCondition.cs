@@ -10,7 +10,11 @@ public class FollowingCondition : BaseCondition
         float distance = Vector3.Distance(stateMachine.gameObject.transform.position, stateMachine.target.position);
         if (distance < stateMachine.blackboard.Get<float>("maxPlayerDistance"))
         {
-            return true;
+            var tempdis = Vector3.Distance(stateMachine.transform.position, stateMachine.waypoints[stateMachine.curretWaypoint].transform.position);
+            if (tempdis < 10)
+            {
+                return true;
+            }
         }
         return false;
     }
