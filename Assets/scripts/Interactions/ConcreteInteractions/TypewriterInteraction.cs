@@ -6,7 +6,7 @@ public class TypewriterInteraction : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interactor)
     {
-        typewriter.ToogleWriting();
+        
     }
 
     public string InteractionName()=> "Talk";

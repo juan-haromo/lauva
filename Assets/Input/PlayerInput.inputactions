@@ -221,6 +221,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "VisualNovel",
+            "id": "f2148ec9-0f13-4a4c-b524-9fb606bb64a6",
+            "actions": [
+                {
+                    "name": "PassDialogue",
+                    "type": "Button",
+                    "id": "b5adb31a-da54-496a-9ceb-4d2ab4155437",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "87d4faf6-1fda-4906-8123-74d9168ab642",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PassDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

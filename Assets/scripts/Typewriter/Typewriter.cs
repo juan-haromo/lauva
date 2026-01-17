@@ -1,53 +1,70 @@
+using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+
 
 public class Typewriter : MonoBehaviour
 {
-    public TextMeshPro lblText;
+    TextMeshProUGUI lblText;
+    Transform dialoguePanel;
     public float timeInterval = 0.1f;
     Coroutine writing;
-    string[] messages = {"Hola","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt nec ante at malesuada. Sed ac arcu tempor leo tincidunt iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer elementum facilisis orci ut blandit. Donec semper, metus vel volutpat porttitor, erat sapien maximus sapien, a dictum libero sapien quis eros. Mauris tellus quam, cursus et rutrum non, lacinia at dolor. Aenean placerat blandit condimentum. Ut suscipit, ligula commodo tincidunt ullamcorper, quam tellus finibus quam, non feugiat nisi enim ut sem. Aliquam ante libero, pellentesque lobortis est vel, maximus lobortis diam. Quisque eu augue augue.", "Texto texto texto a lo wey pero tampoco tanto como un lorem xD"};
     bool isWritting = false;
+    public ConversationEnd OnConversationEnd;
+    int dialogueIndex;
+    Dialogue currentDialogue;
 
     void Start()
     {
+        dialoguePanel = DialogueUI.Instance.dialogueBox;
+        lblText = DialogueUI.Instance.dialogueText;
         lblText.text = string.Empty;
     }
 
-    IEnumerator Type(string text)
-    {
-        isWritting = true;
+    IEnumerator Type()
+    {        
+        isWritting = true;   
         lblText.maxVisibleCharacters = 0;
-        lblText.text = text;
+        lblText.text = currentDialogue.dialogues[dialogueIndex];
         while (lblText.maxVisibleCharacters < lblText.text.Length)
         {
             lblText.maxVisibleCharacters++;
-            yield return new WaitForSeconds(timeInterval);
+            yield return new WaitForSeconds(timeInterval);   
         }
         isWritting = false;
     }
 
-    public void ToogleWriting()
+    public void StartWriting(Dialogue dialogue)
     {
-        if(isWritting)
+        PlayerInputManager.Instance.Input.VisualNovel.PassDialogue.performed += PassDialogue;
+        dialoguePanel.gameObject.SetActive(true);
+        currentDialogue = dialogue;
+        dialogueIndex = 0;
+        writing = StartCoroutine(Type());
+    }
+
+    private void PassDialogue(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (isWritting)
         {
-           StopText(); 
+            StopCoroutine(writing);
+            lblText.maxVisibleCharacters = lblText.text.Length;
+            isWritting = false;
         }
         else
         {
-            if(writing != null){StopCoroutine(writing);}
-            writing = StartCoroutine(Type(messages[Random.Range(0,messages.Length)]));     
+            dialogueIndex++;
+            if(dialogueIndex < currentDialogue.dialogues.Count)
+            {
+                writing = StartCoroutine(Type());
+            }
+            else
+            {
+                lblText.text = string.Empty;
+                dialoguePanel.gameObject.SetActive(false);
+                OnConversationEnd?.Invoke();
+            }
         }
-    }
-
-    public void StopText()
-    {
-        isWritting = false;
-        StopCoroutine(writing);
-        lblText.maxVisibleCharacters = lblText.text.Length;
     }
 }
