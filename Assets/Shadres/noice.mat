@@ -55,14 +55,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.2
+    - _Alpha: 0.327
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _noiseMulti: 1000
-    - _tv: 1
+    - _noiseMulti: 500
+    - _tv: 0
     m_Colors:
-    - _ColorFilter: {r: 0.45403165, g: 0.5377358, b: 0.5354195, a: 1}
+    - _ColorFilter: {r: 0.6226415, g: 0.5257209, b: 0.5257209, a: 0.16470589}
+    - _edge: {r: 0.89, g: 0.72, b: 0, a: 0}
     - _noiseSpeed: {r: 0, g: 0.1, b: 0, a: 0}
-    - _tvSpeed: {r: 0, g: 0.000005, b: 0, a: 0}
+    - _tvSpeed: {r: 0.2, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
