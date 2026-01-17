@@ -11,12 +11,19 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     public Vector2 LastMovement {get; private set;}
     public InputAction MovementAction{get;private set;}
+    [SerializeField] AnimationController animationController;
+    [SerializeField] Transform playerSprite;
+    Vector3 originalScale;
+    float xScale;
 
     void Awake()
     {
         Controller = GetComponent<CharacterController>();   
         MovementAction = PlayerInputManager.Instance.Input.Overworld.Movement;
         currentSpeed = baseSpeed;
+        ascendedLigth.gameObject.SetActive(false);
+        originalScale = playerSprite.localScale;
+        xScale = playerSprite.localScale.x;
     }
 
     void OnEnable()
@@ -32,7 +39,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = Time.deltaTime * currentSpeed *  MovementAction.ReadValue<Vector2>().normalized;
-        if(movement != Vector2.zero){LastMovement = movement;}
+        if(movement != Vector2.zero)
+        {
+            LastMovement = movement;
+            animationController.ChangeAnim("Walk_Bean");
+            originalScale.x = 0 < movement.x? -xScale : xScale;
+            playerSprite.localScale = originalScale;
+        }
+        else
+        {
+            animationController.ChangeAnim(animationController.GetIdle());
+        }
         Controller.Move(movement);
     }
 
