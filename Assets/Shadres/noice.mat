@@ -65,9 +65,9 @@ Material:
     - _noiseMulti: 500
     - _tv: 0
     m_Colors:
-    - _ColorFilter: {r: 0.6603774, g: 0.33953366, b: 0.33953366, a: 1}
-    - _edge: {r: 0.99, g: 0.6, b: 0, a: 0}
-    - _noiseSpeed: {r: 0, g: 0.1, b: 0, a: 0}
-    - _tvSpeed: {r: 0, g: 0.2, b: 0, a: 0}
+    - _ColorFilter: {r: 0.41509432, g: 0.40530434, b: 0.40530434, a: 1}
+    - _edge: {r: 0.93, g: 0.6, b: 0, a: 0}
+    - _noiseSpeed: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _tvSpeed: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
