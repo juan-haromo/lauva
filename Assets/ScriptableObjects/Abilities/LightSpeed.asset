@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e5700e3b018dc4e97dc30ae1c3559d, type: 3}
   m_Name: LightSpeed
   m_EditorClassIdentifier: 
+  speed: 20
+  duration: 3
+  Cooldown: 5
