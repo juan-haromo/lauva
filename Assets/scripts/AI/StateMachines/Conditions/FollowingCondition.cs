@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FollowingCondition", menuName = "BaseEnemy/Conditions/FollowingCondition")]
@@ -10,7 +12,6 @@ public class FollowingCondition : BaseCondition
         {
             return true;
         }
-
         return false;
     }
 }

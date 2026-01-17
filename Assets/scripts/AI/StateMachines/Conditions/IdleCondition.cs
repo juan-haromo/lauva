@@ -8,10 +8,16 @@ public class IdleCondition : BaseCondition
     {
         switch (stateType)
         {
-            case CallState.wandering:
-                float distanceWandering = Vector3.Distance(stateMachine.gameObject.transform.position,stateMachine.blackboard.Get<Vector3>("stopPoint"));
-                if (distanceWandering < 2)
+            case CallState.waypoints:
+                var temp = Vector3.Distance(stateMachine.gameObject.transform.position,
+                    stateMachine.waypoints[stateMachine.curretWaypoint].position);
+                if (temp < 1.5f)
                 {
+                    stateMachine.curretWaypoint++;
+                    if (stateMachine.waypoints.Count <= stateMachine.curretWaypoint)
+                    {
+                        stateMachine.curretWaypoint = 0;
+                    }
                     return true;
                 }
                 break;

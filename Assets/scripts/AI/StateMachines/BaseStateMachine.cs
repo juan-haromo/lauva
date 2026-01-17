@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,8 @@ public class BaseStateMachine : MonoBehaviour
 {
     public BaseState initialState;
     [SerializeField] private BaseState currentState;
+    public List<Transform> waypoints;
+    public int curretWaypoint = new int();
     public Blackboard blackboard = new Blackboard();
     public Transform target;
     public NavMeshAgent agent;
@@ -14,11 +17,11 @@ public class BaseStateMachine : MonoBehaviour
     public LightType lightType;
 
 
-    private void Start()
+    private void Start()    
     {
+        blackboard.Set("maxPlayerDistance",maxPlayerDistance);
         agent.updateRotation = false;
         agent.updateUpAxis = false;     
-        blackboard.Set("maxPlayerDistance",maxPlayerDistance);
         blackboard.Set("StunTime", 0.0f);
         blackboard.Set("trascend", false);
         GameObject objeto = GameObject.FindWithTag("Player");
