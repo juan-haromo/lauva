@@ -56,4 +56,10 @@ public class InteractorDetector : MonoBehaviour
             }                
         }
     }
+
+    public void Clear(IInteractable toRemove)
+    {
+        interactables.Remove(toRemove);
+        lblInteractionName.text = string.Empty;
+    }
 }

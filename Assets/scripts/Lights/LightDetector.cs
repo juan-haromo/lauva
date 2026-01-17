@@ -16,7 +16,9 @@ public interface ILightSource
 
 public enum LightType
 {
-    Cyan,
-    Magenta,
-    Yellow
+    Pink,
+    Yellow,
+    Green,
+    Purple
+
 }
