@@ -49,4 +49,21 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(time);
         currentSpeed = baseSpeed;
     }
+
+    
+    public void Transcend(float duration)
+    {
+        StartCoroutine(Trascended(duration));
+    }
+
+    [SerializeField] Transform ascendedLigth;
+    IEnumerator Trascended(float duration)
+    {
+        TrascendedLightManger.Instance.UnifyLights(duration);
+        MovementAction.Disable();
+        ascendedLigth.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        ascendedLigth.gameObject.SetActive(false);
+        MovementAction.Enable();
+    }
 }
