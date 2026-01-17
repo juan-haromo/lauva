@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "IdleState", menuName = "BaseEnemy/states/IdleState")]
@@ -15,6 +14,7 @@ public class IdleState : BaseState
     {
         stateMachine.gameObject.transform.Rotate(0,0,5f);
         var temp = stateMachine.blackboard.Get<float>("IdleIndexTime") + Time.deltaTime;
+
         stateMachine.blackboard.Set("IdleIndexTime", temp);
     }
 
