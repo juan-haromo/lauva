@@ -9,12 +9,10 @@ public class IdleCondition : BaseCondition
         switch (stateType)
         {
             case CallState.wandering:
-                if (stateMachine.blackboard.Get<float>("WanderingIndexTime") != 0.0f)
+                float distanceWandering = Vector3.Distance(stateMachine.gameObject.transform.position,stateMachine.blackboard.Get<Vector3>("stopPoint"));
+                if (distanceWandering < 2)
                 {
-                    if (stateMachine.blackboard.Get<float>("WanderingIndexTime") > maxIndexTime)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
                 break;
             case CallState.walking:
