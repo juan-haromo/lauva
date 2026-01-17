@@ -3,6 +3,7 @@ using UnityEngine;
 public class TrascendedLight : MonoBehaviour, ILightSource
 {
     [SerializeField] LightType lightType;
+    public static bool areLightsUnified;
 
     public LightType GetLightType()=>lightType;
 }

@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5cb6e7b96fc5fd419a44e4205988434, type: 3}
   m_Name: CallOfLight
   m_EditorClassIdentifier: 
+  cooldown: 10
+  radius: 5
+  aggroMultiplier: 2
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
